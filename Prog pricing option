@@ -1,0 +1,17 @@
+from scipy.stats import norm
+import math
+
+# Paramètres de l'option
+S = 45  # Prix de l'actif sous-jacent
+K = 40  # Prix d'exercice de l'option
+T = 2   # Temps jusqu'à l'expiration de l'option en années
+r = 0.1 # Taux sans risque
+vol = 0.1 # Volatilité de l'actif sous-jacent (σ)
+
+# Formule de Black-Scholes pour le prix de l'option d'achat
+d1 = (math.log(S/K) + (r + 0.5 * vol**2) * T) / (vol * math.sqrt(T))
+d2 = d1 - (vol * math.sqrt(T))
+call = S * norm.cdf(d1) - K * math.exp(-r * T) * norm.cdf(d2)
+
+# Affichage du prix de l'option d'achat
+print("Prix de l'option d'achat:", call)
